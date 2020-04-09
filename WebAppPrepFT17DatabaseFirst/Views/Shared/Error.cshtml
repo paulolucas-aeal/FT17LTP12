@@ -1,0 +1,19 @@
+﻿@model HandleErrorInfo
+
+
+@if (@Model == null)
+{
+    <h2>Error: Something was wrong! Contact your administrator, please!</h2>
+    @Html.ActionLink("Back", "Login", "Accounts")
+}
+else
+{
+    <h2>Error:</h2>
+    <h4 class="text-danger"> @Model.Exception.Message </h4>
+    @Html.ActionLink("Back", @Model.ActionName, @Model.ControllerName)
+}
+
+
+
+
+

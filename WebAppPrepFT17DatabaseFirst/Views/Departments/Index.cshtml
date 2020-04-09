@@ -1,0 +1,46 @@
+﻿@model IEnumerable<WebAppPrepFT17DatabaseFirst.Models.Departments>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.DeptName)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.DeptName)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.Id }, new { @class = "btn btn-link" }) |
+                @Html.ActionLink("Details", "Details", new { id = item.Id }, new { @class = "btn btn-link" }) |
+                @*@Html.ActionLink("Delete", "Delete", new { id = item.Id }, new { onclick = "Delete(" + @item.Id + ")"})*@
+                <a class="btn btn-link" onclick="Delete(@item.Id)">Delete</a>
+            </td>
+        </tr>
+    }
+
+</table>
+
+@section Scripts{
+    <script>
+        function Delete(id) {
+            alertify.confirm('Atenção', 'Tem a certeza que remover o Departamento?', function () {
+                //window.location.href = @Url.Action("Delete", "Departments") + '/' + id;
+                window.location.href = '/Departments/Delete/' + id;
+            }, null);
+        }
+    </script>
+}

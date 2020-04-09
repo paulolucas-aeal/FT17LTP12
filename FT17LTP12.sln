@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29613.14
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FT17LTP12", "WebAppPrepFT17DatabaseFirst\FT17LTP12.csproj", "{DCAB0CD0-9FF2-4CE3-9AE9-7AF294B523EF}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{DCAB0CD0-9FF2-4CE3-9AE9-7AF294B523EF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DCAB0CD0-9FF2-4CE3-9AE9-7AF294B523EF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DCAB0CD0-9FF2-4CE3-9AE9-7AF294B523EF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DCAB0CD0-9FF2-4CE3-9AE9-7AF294B523EF}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {A16CD598-5691-4D62-BE8F-9F16E48FCC14}
+	EndGlobalSection
+EndGlobal

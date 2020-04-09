@@ -1,0 +1,174 @@
+﻿@model IEnumerable<WebAppPrepFT17DatabaseFirst.Models.Employees>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Empregados</h2>
+
+@using (Html.BeginForm("Index", "Employees", FormMethod.Get))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <div class="form-group">
+            <b>Search by:</b>
+
+            @{ 
+                string valor;
+
+                if (ViewData["SearchBy"] == null || ViewData["SearchBy"].ToString() == "Nome")
+                {
+                    valor = "Nome";
+                }
+                else
+                {
+                    valor = "NIF";
+                }
+            }
+
+            @Html.RadioButton("SearchBy", "Nome", (valor == null || valor == "Nome") ? true : false) Nome
+            @Html.RadioButton("SearchBy", "NIF", valor == "NIF" ? true : false) NIF
+
+            <br />
+        </div>
+        <div class="form-group">
+            @Html.TextBox("SearchText", ViewData["SearchText"], new { @class = "form-control" })
+        </div>
+        <div class="form-group">
+            <input class="btn btn-primary" type="submit" name="btnSubmit" value="Search" />
+        </div>
+    </div>
+}
+
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+
+@using (Html.BeginForm("DeleteSelectedEmployees", "Employees", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+
+    <table class="table">
+        <tr>
+            <th>
+                @*@Html.CheckBox("SelectAll")*@
+            </th>
+            <th>
+                @*@Html.DisplayNameFor(model => model.Name)*@
+
+                @Html.ActionLink("Nome", null, null, new { id = "actionLinkName" })
+
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Address)
+            </th>
+            <th>
+                @*@Html.DisplayNameFor(model => model.DateOfBirth)*@
+                @Html.ActionLink("Data de Nascimento", null, null, new { id = "actionLinkDateOfBirth" })
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Salary)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Worktype)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NIF)
+            </th>
+            <th></th>
+        </tr>
+
+        @if (Model.Count() == 0)
+        {
+            <tr>
+                <td colspan="8">No rows in the table or no rows match the search criteria</td>
+            </tr>
+        }
+        else
+        {
+            foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        <input type="checkbox" name="SelectEmployee" id="SelectEmployee" value="@item.Id" />
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Address)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.DateOfBirth)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Salary)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Worktype)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.NIF)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+                        @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+                        @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                    </td>
+                </tr>
+            }
+        }
+
+    </table>
+
+    <div class="form-group">
+        <input class="btn btn-danger" type="submit" name="btnDeleteEmployeesSelected" id="btnDeleteEmployeesSelected" value="Delete Selected" />
+    </div>
+
+}
+
+
+
+@section Scripts{
+    <script>
+        $(function () {
+            $("#actionLinkName").click(function () {
+
+                if ("@ViewData["OrderBy"]" == "NameAsc") {
+                    x = "NameDesc";
+                } else {
+                    x = "NameAsc";
+                }
+
+                top.location.href = "/Employees/Index?SearchBy=" + $("input[name='SearchBy']:checked").val() + "&SearchText=" + $("#SearchText").val() + "&OrderBy=" + x ;
+                return false;
+            });
+
+            $("#actionLinkDateOfBirth").click(function () {
+
+                if ("@ViewData["OrderBy"]" == "DOBAsc") {
+                    x = "DOBDesc";
+                } else {
+                    x = "DOBAsc";
+                }
+
+                top.location.href = "/Employees/Index?SearchBy=" + $("input[name='SearchBy']:checked").val() + "&SearchText=" + $("#SearchText").val() + "&OrderBy=" + x;
+                return false;
+            });
+        });
+    </script>
+}
+
+
+@*@section Scripts{
+        <script>
+            $(function () {
+                var successMessage = '@TempData["successMessage"]';
+                if (successMessage!='') {
+                    alertify.success(successMessage);
+                }
+            });
+        </script>
+    }*@

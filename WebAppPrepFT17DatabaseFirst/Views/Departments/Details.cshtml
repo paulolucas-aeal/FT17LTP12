@@ -1,0 +1,45 @@
+﻿@model WebAppPrepFT17DatabaseFirst.Models.Departments
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Departments</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.DeptName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DeptName)
+        </dd>
+
+    </dl>
+
+    <table class="table table-striped">
+        <caption>Listagem dos Empregados do Departamento @Model.DeptName</caption>
+        <tr>
+            <th>Nome</th>
+            <th>Nº de Identificação Fiscal</th>
+            <th></th>
+        </tr>
+        @foreach (var item in @Model.Employees)
+        {
+            <tr>
+                <td>@item.Name</td>
+                <td>@item.NIF</td>
+                <td>@Html.ActionLink("Details", "Details", "Employees", new { Id = item.Id }, null)</td>
+            </tr>
+        }
+    </table>
+</div>
+
+
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
